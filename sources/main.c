@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 10:15:40 by bsouchet          #+#    #+#             */
-/*   Updated: 2016/02/03 19:39:05 by bsouchet         ###   ########.fr       */
+/*   Updated: 2016/02/03 20:14:47 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char		*ft_open(char *file, int *fd, int ret)
 		return (NULL);
 	if ((ret = read(*fd, buf, BUFF_SIZE)) == -1 || ret == 0)
 		return (NULL);
-	buf[ret - 1] = '\0';
+	buf[ret - 1] = 0;
 	return (buf);
 }
 
@@ -62,14 +62,14 @@ static char		**ft_convert(char *buf, int *i, int j, int k)
 		return (NULL);
 	if (!(tab[*i] = (char *)malloc(sizeof(char) * 5)))
 		return (NULL);
-	while (buf[k] != '\0')
+	while (buf[k] != 0)
 	{
-		if (buf[k] == '\n' && (j = 0) == 0 && ++k != 0)
+		if (buf[k] == 10 && (j = 0) == 0 && ++k != 0)
 		{
 			if (!(tab[++(*i)] = (char *)malloc(sizeof(char) * 5)))
 				return (NULL);
 		}
-		while (buf[k] != '\n' && buf[k] != '\0')
+		while (buf[k] != 10 && buf[k] != 0)
 			tab[*i][j++] = buf[k++];
 	}
 	free(buf);
@@ -85,14 +85,18 @@ int				main(int ac, char **av)
 	fd = 0;
 	file = ft_init(file);
 	tab = NULL;
-	if (ac == 2)
-		tab = ft_convert(ft_open(av[1], &fd, 0), &file.m, 0, 0);
-	if (tab != NULL && ft_check(tab, file) != -1 && close(fd) != -1)
+	if (ac != 2)
+		write(1, "usage: ./fillit input_file\n", 27);
+	else
 	{
-		if (!(ft_resolve(tab, file, NULL)))
+		tab = ft_convert(ft_open(av[1], &fd, 0), &file.m, 0, 0);
+		if (tab != NULL && ft_check(tab, file) != -1 && close(fd) != -1)
+		{
+			if (!(ft_resolve(tab, file, NULL)))
+				write(1, "error\n", 6);
+		}
+		else
 			write(1, "error\n", 6);
 	}
-	else
-		write(1, "error\n", 6);
 	return (0);
 }

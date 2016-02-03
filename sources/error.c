@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 10:10:20 by bsouchet          #+#    #+#             */
-/*   Updated: 2016/02/02 14:17:12 by bsouchet         ###   ########.fr       */
+/*   Updated: 2016/02/03 19:54:53 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 static t_file	ft_valid(char **s, t_file f)
 {
-	while (f.y <= f.m && s[f.y][0] != '\0')
+	while (f.y <= f.m && s[f.y][0] != 0)
 	{
 		f.x = 0;
-		while (CRT != '\0')
+		while (s[f.y][f.x] != 0)
 		{
-			if (CRT == '#')
+			if (s[f.y][f.x] == 35)
 			{
-				if (XBFR == '#')
+				if (s[f.y][f.x - 1] == 35)
 					f.c++;
-				if (XAFR == '#')
+				if (s[f.y][f.x + 1] == 35)
 					f.c++;
-				if (f.y != 0 && YBFR == '#' && s[f.y - 1][0] != '\0')
+				if (f.y != 0 && s[f.y - 1][f.x] == 35 && s[f.y - 1][0] != 0)
 					f.c++;
-				if (f.y != f.m && s[f.y + 1][0] != '\0' && YAFR == '#')
+				if (f.y != f.m && s[f.y + 1][0] != 0 && s[f.y + 1][f.x] == 35)
 					f.c++;
 				f.h++;
 			}
-			if (CRT != '#' && CRT != '.')
+			if (s[f.y][f.x] != 35 && s[f.y][f.x] != 46)
 				f.c = -10;
 			f.x++;
 		}

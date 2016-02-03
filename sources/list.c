@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 10:20:20 by bsouchet          #+#    #+#             */
-/*   Updated: 2016/02/02 14:15:12 by bsouchet         ###   ########.fr       */
+/*   Updated: 2016/02/03 19:58:48 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static t_file		ft_sequence(char **s, t_file f, t_pos *pos, int height)
 {
-	while (f.y <= f.m && s[f.y][0] != '\0')
+	while (f.y <= f.m && s[f.y][0] != 0)
 	{
 		f.x = 0;
-		while (CRT != '\0')
+		while (s[f.y][f.x] != 0)
 		{
-			if (CRT == '#')
+			if (s[f.y][f.x] == 35)
 				f.h++;
-			if (CRT == '#' && f.x < pos->x)
+			if (s[f.y][f.x] == 35 && f.x < pos->x)
 				pos->x = f.x;
-			if (CRT == '#' && f.x > pos->y)
+			if (s[f.y][f.x] == 35 && f.x > pos->y)
 				pos->y = f.x;
 			f.x++;
 		}

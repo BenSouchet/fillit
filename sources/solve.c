@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 11:00:00 by bsouchet          #+#    #+#             */
-/*   Updated: 2016/02/02 14:21:02 by bsouchet         ###   ########.fr       */
+/*   Updated: 2016/02/03 20:02:25 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char		**ft_place(char **tab, char **dst, t_tetri *list, t_file f)
 	{
 		f.h = 0;
 		f.x = f.i;
-		while (dst[f.y][f.x] != '\0' && f.h < shape.w)
+		while (dst[f.y][f.x] != 0 && f.h < shape.w)
 		{
 			if (tab[shape.y][shape.x] != 46)
 				dst[f.y][f.x] = tab[shape.y][shape.x];
@@ -49,7 +49,7 @@ static int		ft_shape(char **tab, char **dest, t_tetri *list, t_file f)
 	{
 		f.x = f.i;
 		shape.x = f.c;
-		while (dest[f.y][f.x] != '\0' && f.h < shape.w)
+		while (dest[f.y][f.x] != 0 && f.h < shape.w)
 		{
 			if (dest[f.y][f.x] != 46 && tab[shape.y][shape.x] != 46)
 				return (0);
@@ -73,7 +73,7 @@ static char		**ft_slv(char **tab, char **dst, t_tetri *list, t_file f)
 	while (f.j < f.s)
 	{
 		f.i = 0;
-		while (dst[f.j][f.i] != '\0')
+		while (dst[f.j][f.i] != 0)
 		{
 			if (dst[f.j][f.i] != 46 && tab[list->y][list->x] != 46)
 				;
@@ -93,7 +93,7 @@ static char		**ft_del(char **tab, t_file f)
 	while (f.y < f.s && f.c < 4)
 	{
 		f.x = 0;
-		while (tab[f.y][f.x] != '\0' && f.c < 4)
+		while (tab[f.y][f.x] != 0 && f.c < 4)
 		{
 			if (tab[f.y][f.x] == 65 + f.perm[f.k] && f.c++ > -1)
 				tab[f.y][f.x] = 46;
