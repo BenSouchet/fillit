@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 11:15:00 by bsouchet          #+#    #+#             */
-/*   Updated: 2016/02/02 14:41:34 by bsouchet         ###   ########.fr       */
+/*   Updated: 2016/02/03 18:50:18 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ char				**ft_double_strdup(char **s, t_file f);
 char				**ft_exec(char **tab, t_tetri *list, t_file f, char **dst);
 void				ft_swap(int *nbr, int a, int b);
 void				ft_print(char **tab, t_file f);
-void				ft_resolve(char **tab, t_file f, char **dest);
+char				**ft_resolve(char **tab, t_file f, char **dest);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 10:40:50 by bsouchet          #+#    #+#             */
-/*   Updated: 2016/02/02 14:19:05 by bsouchet         ###   ########.fr       */
+/*   Updated: 2016/02/03 18:52:35 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,9 @@ static char		**ft_perm(char **tab, char **dest, t_tetri *list, t_file f)
 {
 	int		*tmp;
 
-	if (!(tmp = (int *)malloc(sizeof(int) * f.nshape)))
-		return (NULL);
-	if (!(f.perm = (int *)malloc(sizeof(int) * f.nshape)))
-		return (NULL);
+	if (!(tmp = (int *)malloc(sizeof(int) * f.nshape)) ||
+			!(f.perm = (int *)malloc(sizeof(int) * f.nshape)))
+		return (tab);
 	tmp[0] = -1;
 	f.perm = ft_set_value(f.perm, f.perm, f.nshape, 0);
 	if ((dest = ft_exec(tab, list, f, ft_square(f.s, 0, 0))))
@@ -100,10 +99,11 @@ static char		**ft_perm(char **tab, char **dest, t_tetri *list, t_file f)
 			return (ft_exec(tab, list, f, ft_square(f.s, 0, 0)));
 		}
 	}
+	free(tmp);
 	return (NULL);
 }
 
-void			ft_resolve(char **tab, t_file f, char **dest)
+char			**ft_resolve(char **tab, t_file f, char **dest)
 {
 	t_tetri	*list;
 
@@ -115,7 +115,12 @@ void			ft_resolve(char **tab, t_file f, char **dest)
 	while (!(dest))
 	{
 		dest = ft_perm(ft_alpha(tab, f), ft_square(f.s, 0, 0), list, f);
+		if (dest == tab)
+			return (NULL);
 		f.s++;
 	}
 	ft_print(dest, f);
+	free(list);
+	free(tab);
+	return (dest);
 }
