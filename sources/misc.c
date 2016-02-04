@@ -6,7 +6,7 @@
 /*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 10:20:30 by bsouchet          #+#    #+#             */
-/*   Updated: 2016/02/03 20:01:10 by bsouchet         ###   ########.fr       */
+/*   Updated: 2016/02/04 13:45:59 by bsouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**ft_double_strdup(char **s, t_file f)
 	while (f.y < f.s)
 	{
 		f.x = 0;
-		if (!(dest[f.y] = (char *)malloc(sizeof(char) * ft_ln(s[f.y]) + 1)))
+		if (!(dest[f.y] = (char *)malloc(sizeof(char) * 64)))
 			return (NULL);
 		while (s[f.x] != 0)
 		{
